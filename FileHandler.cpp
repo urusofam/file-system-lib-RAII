@@ -19,12 +19,10 @@ bool FileHandler::writeLine(const std::string& line) {
         file << line << std::endl;
         if (file.fail()) {
             throw FileException("Failed to write line to file");
-            return false;
         }
         return true;
     }
     throw FileException("File is not open");
-    return false;
 }
 
 bool FileHandler::readLine(std::string& line) {
@@ -32,11 +30,9 @@ bool FileHandler::readLine(std::string& line) {
         if (std::getline(file, line)) {
             return true;
         } else {
-            throw FileException("Failed to read line from file");
             return false;
         }
     }
     throw FileException("File is not open");
-    return false;
 }
 
