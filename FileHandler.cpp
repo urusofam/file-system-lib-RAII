@@ -8,6 +8,22 @@ FileHandler::FileHandler(const std::string& filepath_, std::ios_base::openmode m
     }
 }
 
+FileHandler::FileHandler(FileHandler&& other) noexcept : filepath(std::move(other.filepath)), file(std::move(other.file)) {}
+
+FileHandler& FileHandler::operator=(FileHandler&& other) noexcept {
+    if (this != &other) {
+        if (file.is_open()) {
+            file.close();
+        }
+
+        filepath = std::move(other.filepath);
+        file = std::move(other.file);
+    }
+    
+    return *this;
+}
+
+
 FileHandler::~FileHandler() {
     if (file.is_open()) {
         file.close();

@@ -18,8 +18,13 @@ class FileHandler {
 public:
     FileHandler(const std::string& filepath, std::ios_base::openmode mode);
     ~FileHandler();
+
     FileHandler(const FileHandler&) = delete;
     FileHandler& operator=(const FileHandler&) = delete;
+
+    FileHandler(FileHandler&& other) noexcept;
+    FileHandler& operator=(FileHandler&& other) noexcept;
+
     bool writeLine(const std::string& line);
     bool readLine(std::string& line);
 };
